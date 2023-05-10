@@ -4,7 +4,6 @@ import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcryptjs';
 import { User } from 'src/users/users.model';
-import { threadId } from 'worker_threads';
 
 @Injectable()
 export class AuthService {
