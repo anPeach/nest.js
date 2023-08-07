@@ -18,7 +18,8 @@ export class AuthController {
   ) {
     const { token } = await this.authService.login(dto);
 
-    response.cookie('jwt', token, { httpOnly: true }).send();
+    // response.cookie('jwt', token, { httpOnly: true }).send();
+    return token;
   }
 
   @Post('/registration')
