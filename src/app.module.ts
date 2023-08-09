@@ -10,6 +10,9 @@ import { RolesModule } from './roles/roles.module';
 import { Role } from './roles/roles.model';
 import { UserRoles } from './intermediate-tables/user-roles.model';
 import { AuthModule } from './auth/auth.module';
+import { PostsController } from './posts/posts.controller';
+import { PostsService } from './posts/posts.service';
+import { PostsModule } from './posts/posts.module';
 
 @Module({
   imports: [
@@ -29,6 +32,7 @@ import { AuthModule } from './auth/auth.module';
     UsersModule,
     RolesModule,
     AuthModule,
+    PostsModule,
   ],
   controllers: [],
   providers: [],

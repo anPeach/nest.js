@@ -39,6 +39,13 @@ export class UsersController {
     return this.userService.getAll();
   }
 
+  @ApiOperation({ summary: 'Get user by email' })
+  @ApiResponse({ status: 200, type: [User] })
+  @Get('/:id')
+  getById(@Param() { id }) {
+    return this.userService.getById(id);
+  }
+
   @ApiOperation({ summary: 'Add role' })
   @ApiResponse({ status: 200 })
   @Roles('ADMIN')
