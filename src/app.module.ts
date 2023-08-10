@@ -10,8 +10,7 @@ import { RolesModule } from './roles/roles.module';
 import { Role } from './roles/roles.model';
 import { UserRoles } from './intermediate-tables/user-roles.model';
 import { AuthModule } from './auth/auth.module';
-import { PostsController } from './posts/posts.controller';
-import { PostsService } from './posts/posts.service';
+import { Post } from './posts/posts.model';
 import { PostsModule } from './posts/posts.module';
 
 @Module({
@@ -26,7 +25,7 @@ import { PostsModule } from './posts/posts.module';
       username: process.env.POSTGRES_USER,
       password: process.env.POSTGRES_PASSWORD,
       database: process.env.POSTGRES_DB,
-      models: [User, Role, UserRoles],
+      models: [User, Role, UserRoles, Post],
       autoLoadModels: true,
     }),
     UsersModule,
