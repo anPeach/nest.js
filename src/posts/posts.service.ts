@@ -11,6 +11,24 @@ export class PostsService {
     return this.postRepository.create(dto);
   }
 
+  async getAll() {
+    return this.postRepository.findAll({ include: { all: true } });
+  }
+
+  async getById(id: number) {
+    return this.postRepository.findOne({
+      where: { id },
+      include: { all: true },
+    });
+  }
+
+  async getByUserId(id: number) {
+    return this.postRepository.findOne({
+      where: { userId: id },
+      include: { all: true },
+    });
+  }
+
   async delete(id: number) {
     return this.postRepository.destroy({
       where: { id },

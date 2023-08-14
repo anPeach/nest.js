@@ -2,8 +2,10 @@ import {
   Body,
   Controller,
   Delete,
+  Get,
   Param,
   Post,
+  Query,
   UseGuards,
   UsePipes,
 } from '@nestjs/common';
@@ -20,11 +22,32 @@ export class PostsController {
 
   @ApiOperation({ summary: 'Create new post' })
   @ApiResponse({ status: 200, type: UserPost })
-  @UsePipes(ValidationPipe)
   @UseGuards(JwtAuthGuard)
+  @UsePipes(ValidationPipe)
   @Post()
   create(@Body() dto: CreatePostDto) {
     return this.postService.create(dto);
+  }
+
+  @ApiOperation({ summary: 'Get post by id' })
+  @ApiResponse({ status: 200, type: UserPost })
+  @Get('/:id')
+  getById(@Param() { id }) {
+    return this.postService.getById(id);
+  }
+
+  @ApiOperation({ summary: 'Get post by user id' })
+  @ApiResponse({ status: 200, type: UserPost })
+  @Get('/:?')
+  getByUserId(@Query('userId') userId: number) {
+    return this.postService.getByUserId(userId);
+  }
+
+  @ApiOperation({ summary: 'Get all posts' })
+  @ApiResponse({ status: 200, type: UserPost })
+  @Get()
+  getAll() {
+    return this.postService.getAll();
   }
 
   @ApiOperation({ summary: 'Delete a post' })
