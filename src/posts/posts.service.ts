@@ -12,7 +12,7 @@ export class PostsService {
   }
 
   async getAll() {
-    return this.postRepository.findAll({ include: { all: true } });
+    return this.postRepository.findAll();
   }
 
   async getById(id: number) {
@@ -23,9 +23,8 @@ export class PostsService {
   }
 
   async getByUserId(id: number) {
-    return this.postRepository.findOne({
+    return this.postRepository.findAll({
       where: { userId: id },
-      include: { all: true },
     });
   }
 

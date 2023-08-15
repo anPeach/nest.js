@@ -6,6 +6,7 @@ import { AuthService } from './auth.service';
 import { AuthUserDto } from 'src/users/dto/auth-user.dto';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UsersService } from 'src/users/users.service';
+import { omit } from 'src/utils/utils';
 
 @ApiTags('Authorization')
 @Controller('auth')
@@ -21,20 +22,18 @@ export class AuthController {
     @Body() dto: AuthUserDto,
   ) {
     const { token } = await this.authService.login(dto);
-    const { id, name, nickname, email } = await this.userService.getByEmail(
-      dto.email,
-    );
+    const user = await this.userService.getByEmail(dto.email);
+    const res = omit('password', user.dataValues);
 
-    return { id, name, nickname, email, token };
+    return { ...res, token };
   }
 
   @Post('/registration')
   async registration(@Body() dto: CreateUserDto) {
     const { token } = await this.authService.registration(dto);
-    const { id, name, nickname, email } = await this.userService.getByEmail(
-      dto.email,
-    );
+    const user = await this.userService.getByEmail(dto.email);
+    const res = omit('password', user.dataValues);
 
-    return { id, name, nickname, email, token };
+    return { ...res, token };
   }
 }

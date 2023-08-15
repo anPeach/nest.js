@@ -22,27 +22,20 @@ export class UsersService {
     return user;
   }
 
-  async getByEmail(email: string) {
-    const user = await this.userRepository.findOne({
+  getByEmail(email: string) {
+    return this.userRepository.findOne({
       where: { email },
-      include: { all: true },
     });
-
-    return user;
   }
 
-  async getById(id: number) {
-    const { name, nickname, email } = await this.userRepository.findOne({
+  getById(id: number) {
+    return this.userRepository.findOne({
       where: { id },
-      include: { all: true },
     });
-
-    return { id, name, nickname, email };
   }
 
-  async getAll() {
-    const users = this.userRepository.findAll({ include: { all: true } });
-    return users;
+  getAll() {
+    return this.userRepository.findAll();
   }
 
   async addRole(dto: AddRoleDto, id: number) {
